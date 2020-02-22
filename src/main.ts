@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import { getRandomNumber } from './utils';
 
 let playerScore: number = 0;
 
@@ -62,18 +63,6 @@ mainCircle.endFill();
 stage.addChild(mainCircle);
 
 let circleXPosition = 0;
-
-const getRandomNumber = () => {
-  // fetch random number
-  return fetch(
-    'https://www.random.org/integers/?num=1&min=0&max=4&col=1&base=10&format=plain&rnd=new'
-  )
-    .then((response) => response.json())
-    .then((generatedRandomNumber) => generatedRandomNumber)
-    .catch((error) => {
-      console.log(error);
-    });
-};
 
 availableColours.map((colour, index) => {
   const colourCircle = new PIXI.Graphics();

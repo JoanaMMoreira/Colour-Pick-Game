@@ -12,7 +12,7 @@ var watchedBrowserify = watchify(
   browserify({
     basedir: '.',
     debug: true,
-    entries: ['src/main.ts'],
+    entries: ['src/main.ts', 'src/utils.ts'],
     cache: {},
     packageCache: {}
   }).plugin(tsify)
