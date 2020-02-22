@@ -1,11 +1,11 @@
 import * as PIXI from 'pixi.js';
 import { getRandomNumber } from './utils';
 
+let playerScore: number = 0;
+
+let numberOfClicks: number = 0;
+
 const renderNewGame = () => {
-  let playerScore: number = 0;
-
-  let numberOfClicks: number = 0;
-
   let timeRemaining: number = 20;
 
   const renderer: PIXI.Renderer = PIXI.autoDetectRenderer({
@@ -115,7 +115,6 @@ const renderNewGame = () => {
     const downloadTimer = setInterval(() => {
       if (timeRemaining <= 0) {
         clearInterval(downloadTimer);
-        timeField.text = 'Time is up';
         document.getElementById('pixi-app').removeChild(renderer.view);
         displayResults();
       } else {
@@ -174,17 +173,44 @@ const displayResults = () => {
 
   const stage: PIXI.Container = new PIXI.Container();
 
-  const title = new PIXI.Text(`Game Over`, {
+  const title = new PIXI.Text('Time is up!', {
+    fontFamily: 'Arial',
+    fontSize: 30,
+    fill: 0xffffff,
+    align: 'center'
+  });
+
+  title.anchor.set(0.5, 0.5);
+  title.position.set(renderer.width / 2, 120);
+
+  stage.addChild(title);
+
+  const finalScore = new PIXI.Text(`Final score: ${playerScore} points`, {
     fontFamily: 'Arial',
     fontSize: 24,
     fill: 0xffffff,
     align: 'center'
   });
 
-  title.anchor.set(0.5, 0.5);
-  title.position.set(renderer.width / 2, 40);
+  finalScore.anchor.set(0.5, 0.5);
+  finalScore.position.set(renderer.width / 2, 200);
 
-  stage.addChild(title);
+  stage.addChild(finalScore);
+
+  const numberOfAttempts = new PIXI.Text(
+    `Number of attempts: ${numberOfClicks}`,
+    {
+      fontFamily: 'Arial',
+      fontSize: 24,
+      fill: 0xffffff,
+      align: 'center'
+    }
+  );
+
+  numberOfAttempts.anchor.set(0.5, 0.5);
+  numberOfAttempts.position.set(renderer.width / 2, 280);
+
+  stage.addChild(numberOfAttempts);
 
   const animate = () => {
     renderer.render(stage);
