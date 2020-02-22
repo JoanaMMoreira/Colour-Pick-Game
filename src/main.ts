@@ -116,7 +116,8 @@ const renderNewGame = () => {
       if (timeRemaining <= 0) {
         clearInterval(downloadTimer);
         timeField.text = `Time is up`;
-        // show results screen
+        document.getElementById('pixi-app').removeChild(renderer.view);
+        displayResults();
       } else {
         timeField.text = `Timer ${timeRemaining}`;
       }
@@ -160,6 +161,30 @@ const renderNewGame = () => {
 
     setTimeout(stopInterval, 2000); // stop rotating after 2 seconds
   };
+};
+
+const displayResults = () => {
+  const renderer: PIXI.Renderer = PIXI.autoDetectRenderer({
+    width: 480,
+    height: 600,
+    backgroundColor: 0x1f1f1f
+  });
+
+  document.getElementById('pixi-app').appendChild(renderer.view);
+
+  const stage: PIXI.Container = new PIXI.Container();
+
+  const title = new PIXI.Text(`Game Over`, {
+    fontFamily: 'Arial',
+    fontSize: 24,
+    fill: 0xffffff,
+    align: 'center'
+  });
+
+  title.anchor.set(0.5, 0.5);
+  title.position.set(renderer.width / 2, 40);
+
+  stage.addChild(title);
 };
 
 renderNewGame();
