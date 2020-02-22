@@ -1,7 +1,8 @@
 {
-  "files": ["dist/src/main.ts"],
+  "files": ["./src/main.ts"],
   "compilerOptions": {
     "noImplicitAny": true,
-    "target": "es5"
+    "target": "es5",
+    "lib": ["es2018", "dom"]
   }
 }

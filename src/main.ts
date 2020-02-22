@@ -117,7 +117,7 @@ const renderNewGame = () => {
   };
 
   const startTimer = () => {
-    const downloadTimer: NodeJS.Timeout = setInterval(() => {
+    const downloadTimer = setInterval(() => {
       if (timeRemaining <= 0) {
         clearInterval(downloadTimer);
         document.getElementById('pixi-app').removeChild(renderer.view);
@@ -141,7 +141,7 @@ const renderNewGame = () => {
 
     chosenColours = [...chosenColours, availableColours[index]];
 
-    const setIntervalID: NodeJS.Timeout = setInterval(rotateColours, 100);
+    const setIntervalID = setInterval(rotateColours, 100);
 
     const randomNumber: number = await getRandomNumber(0, 4);
 
