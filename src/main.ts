@@ -115,7 +115,7 @@ const renderNewGame = () => {
     const downloadTimer = setInterval(() => {
       if (timeRemaining <= 0) {
         clearInterval(downloadTimer);
-        timeField.text = `Time is up`;
+        timeField.text = 'Time is up';
         document.getElementById('pixi-app').removeChild(renderer.view);
         displayResults();
       } else {
@@ -185,6 +185,13 @@ const displayResults = () => {
   title.position.set(renderer.width / 2, 40);
 
   stage.addChild(title);
+
+  const animate = () => {
+    renderer.render(stage);
+    requestAnimationFrame(animate);
+  };
+
+  animate();
 };
 
 renderNewGame();
