@@ -6,7 +6,7 @@ let playerScore: number = 0;
 let numberOfClicks: number = 0;
 
 const renderNewGame = () => {
-  let timeRemaining: number = 20;
+  let timeRemaining: number = 5;
 
   const renderer: PIXI.Renderer = PIXI.autoDetectRenderer({
     width: 480,
@@ -58,7 +58,7 @@ const renderNewGame = () => {
 
   mainCircle.lineStyle(2, 0xffffff);
 
-  mainCircle.drawCircle(renderer.width / 2, 220, 100);
+  mainCircle.drawCircle(renderer.width / 2, 260, 100);
 
   mainCircle.endFill();
 
@@ -106,7 +106,7 @@ const renderNewGame = () => {
     mainCircle.clear();
     mainCircle.beginFill(availableColours[colourIndex]);
     mainCircle.lineStyle(2, 0xffffff);
-    mainCircle.drawCircle(renderer.width / 2, 220, 100);
+    mainCircle.drawCircle(renderer.width / 2, 260, 100);
 
     renderer.render(stage);
   };
@@ -144,7 +144,7 @@ const renderNewGame = () => {
       mainCircle.clear();
       mainCircle.beginFill(availableColours[randomNumber]);
       mainCircle.lineStyle(2, 0xffffff);
-      mainCircle.drawCircle(renderer.width / 2, 220, 100);
+      mainCircle.drawCircle(renderer.width / 2, 260, 100);
 
       renderer.render(stage);
 
@@ -211,6 +211,33 @@ const displayResults = () => {
   numberOfAttempts.position.set(renderer.width / 2, 280);
 
   stage.addChild(numberOfAttempts);
+
+  const buttonText = new PIXI.Text('Try again', {
+    fontFamily: 'Arial',
+    fontSize: 24,
+    fill: 0x1f1f1f,
+    align: 'center'
+  });
+  buttonText.anchor.set(0.5, 0.5);
+  buttonText.position.set(75, 50);
+
+  const playAgainButton = new PIXI.Graphics();
+
+  playAgainButton.beginFill(0xffffff);
+  playAgainButton.drawRect(0, 0, 150, 100);
+  playAgainButton.endFill();
+
+  playAgainButton.buttonMode = true;
+  playAgainButton.interactive = true;
+
+  playAgainButton.addChild(buttonText);
+  playAgainButton.position.set(170, 350);
+
+  playAgainButton.on('click', () => {
+    console.log('clicked');
+  });
+
+  stage.addChild(playAgainButton);
 
   const animate = () => {
     renderer.render(stage);
