@@ -1,46 +1,25 @@
 body {
   margin: 10% auto;
   text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(246, 246, 246, 1) 47%,
+    rgba(237, 237, 237, 1) 100%
+  );
 }
 
 body div {
   padding: 20px;
 }
 
-#colour-circle {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  background-color: grey;
+h1 {
+  font-family: 'Arial';
+  color: #1f1f1f;
 }
 
-#available-colours div {
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  margin: 10px;
-}
-
-.red {
-  background-color: red;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.green {
-  background-color: green;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.orange {
-  background-color: orange;
+canvas {
+  border-radius: 4%;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
+    0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
 }
