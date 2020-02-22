@@ -1,0 +1,5 @@
+Run the following commands:
+- npm install
+- gulp
+
+Open index.html from the dist folder 
