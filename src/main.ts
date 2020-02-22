@@ -120,6 +120,8 @@ const rotateColours = () => {
 };
 
 const handleClick = async (index: number) => {
+  // disable buttons
+
   numberOfClicks += 1;
 
   const setIntervalID = setInterval(rotateColours, 100);
@@ -139,6 +141,8 @@ const handleClick = async (index: number) => {
     if (index === randomNumber) {
       playerScoreText.text = `Score ${(playerScore += 1)}`;
     }
+
+    // enable buttons
   };
 
   setTimeout(stopInterval, 2000); // stop rotating after 2 seconds
