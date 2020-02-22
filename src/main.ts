@@ -6,7 +6,7 @@ let playerScore: number = 0;
 let numberOfClicks: number = 0;
 
 const renderNewGame = () => {
-  let timeRemaining: number = 5;
+  let timeRemaining: number = 20;
 
   const renderer: PIXI.Renderer = PIXI.autoDetectRenderer({
     width: 480,
@@ -162,6 +162,8 @@ const renderNewGame = () => {
   };
 };
 
+renderNewGame();
+
 const displayResults = () => {
   const renderer: PIXI.Renderer = PIXI.autoDetectRenderer({
     width: 480,
@@ -234,7 +236,11 @@ const displayResults = () => {
   playAgainButton.position.set(170, 350);
 
   playAgainButton.on('click', () => {
-    console.log('clicked');
+    // reset game
+    playerScore = 0;
+    numberOfClicks = 0;
+    document.getElementById('pixi-app').removeChild(renderer.view);
+    renderNewGame();
   });
 
   stage.addChild(playAgainButton);
@@ -246,5 +252,3 @@ const displayResults = () => {
 
   animate();
 };
-
-renderNewGame();
