@@ -5,6 +5,8 @@ let playerScore: number = 0;
 
 let numberOfClicks: number = 0;
 
+let chosenColours: number[] = [];
+
 const renderNewGame = () => {
   let timeRemaining: number = 20;
 
@@ -26,9 +28,9 @@ const renderNewGame = () => {
     0xff7c00
   ];
 
-  let colourIndex = 0;
+  let colourIndex:number = 0;
 
-  const timeField = new PIXI.Text(`Timer ${timeRemaining}`, {
+  const timeField: PIXI.Text = new PIXI.Text(`Timer ${timeRemaining}`, {
     fontFamily: 'Arial',
     fontSize: 24,
     fill: 0xffffff,
@@ -40,7 +42,7 @@ const renderNewGame = () => {
 
   stage.addChild(timeField);
 
-  const playerScoreText = new PIXI.Text(`Score ${playerScore}`, {
+  const playerScoreText: PIXI.Text = new PIXI.Text(`Score ${playerScore}`, {
     fontFamily: 'Arial',
     fontSize: 24,
     fill: 0xffffff,
@@ -64,10 +66,10 @@ const renderNewGame = () => {
 
   stage.addChild(mainCircle);
 
-  let circleXPosition = 0;
+  let circleXPosition: number = 0;
 
-  availableColours.map((colour, index) => {
-    const colourCircle = new PIXI.Graphics();
+  availableColours.map((colour: number, index: number) => {
+    const colourCircle: PIXI.Graphics = new PIXI.Graphics();
 
     colourCircle.buttonMode = true;
 
@@ -112,7 +114,7 @@ const renderNewGame = () => {
   };
 
   const startTimer = () => {
-    const downloadTimer = setInterval(() => {
+    const downloadTimer: NodeJS.Timeout = setInterval(() => {
       if (timeRemaining <= 0) {
         clearInterval(downloadTimer);
         document.getElementById('pixi-app').removeChild(renderer.view);
@@ -134,9 +136,11 @@ const renderNewGame = () => {
       startTimer(); // start the timer on the first click
     }
 
-    const setIntervalID = setInterval(rotateColours, 100);
+    chosenColours = [...chosenColours, availableColours[index]];
 
-    const randomNumber = await getRandomNumber();
+    const setIntervalID: NodeJS.Timeout = setInterval(rotateColours, 100);
+
+    const randomNumber: number = await getRandomNumber();
 
     const stopInterval = () => {
       clearInterval(setIntervalID);
@@ -175,7 +179,7 @@ const displayResults = () => {
 
   const stage: PIXI.Container = new PIXI.Container();
 
-  const title = new PIXI.Text('Time is up!', {
+  const title: PIXI.Text = new PIXI.Text('Time is up!', {
     fontFamily: 'Arial',
     fontSize: 30,
     fill: 0xffffff,
@@ -187,7 +191,7 @@ const displayResults = () => {
 
   stage.addChild(title);
 
-  const finalScore = new PIXI.Text(`Final score: ${playerScore}`, {
+  const finalScore: PIXI.Text = new PIXI.Text(`Final score: ${playerScore}`, {
     fontFamily: 'Arial',
     fontSize: 24,
     fill: 0xffffff,
@@ -199,7 +203,7 @@ const displayResults = () => {
 
   stage.addChild(finalScore);
 
-  const numberOfAttempts = new PIXI.Text(
+  const numberOfAttempts: PIXI.Text = new PIXI.Text(
     `Number of attempts: ${numberOfClicks}`,
     {
       fontFamily: 'Arial',
@@ -210,11 +214,29 @@ const displayResults = () => {
   );
 
   numberOfAttempts.anchor.set(0.5, 0.5);
-  numberOfAttempts.position.set(renderer.width / 2, 280);
+  numberOfAttempts.position.set(renderer.width / 2, 260);
 
   stage.addChild(numberOfAttempts);
 
-  const buttonText = new PIXI.Text('Try again', {
+  let circleXPosition: number = 100;
+
+  chosenColours.map((colour, index) => {
+    const colourCircle = new PIXI.Graphics();
+
+    colourCircle.beginFill(colour);
+
+    colourCircle.lineStyle(2, 0xffffff);
+
+    circleXPosition += 30;
+
+    colourCircle.drawCircle(circleXPosition, 290, 10);
+
+    colourCircle.endFill();
+
+    stage.addChild(colourCircle);
+  });
+
+  const buttonText: PIXI.Text = new PIXI.Text('Try again', {
     fontFamily: 'Arial',
     fontSize: 24,
     fill: 0xffffff,
@@ -223,7 +245,7 @@ const displayResults = () => {
   buttonText.anchor.set(0.5, 0.5);
   buttonText.position.set(75, 50);
 
-  const playAgainButton = new PIXI.Graphics();
+  const playAgainButton: PIXI.Graphics = new PIXI.Graphics();
 
   playAgainButton.beginFill(0x425cff);
   playAgainButton.drawRoundedRect(0, 0, 150, 100, 10);
@@ -239,6 +261,7 @@ const displayResults = () => {
     // reset game
     playerScore = 0;
     numberOfClicks = 0;
+    chosenColours = [];
     document.getElementById('pixi-app').removeChild(renderer.view);
     renderNewGame();
   });
