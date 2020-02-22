@@ -187,7 +187,7 @@ const displayResults = () => {
 
   stage.addChild(title);
 
-  const finalScore = new PIXI.Text(`Final score: ${playerScore} points`, {
+  const finalScore = new PIXI.Text(`Final score: ${playerScore}`, {
     fontFamily: 'Arial',
     fontSize: 24,
     fill: 0xffffff,
@@ -217,7 +217,7 @@ const displayResults = () => {
   const buttonText = new PIXI.Text('Try again', {
     fontFamily: 'Arial',
     fontSize: 24,
-    fill: 0x1f1f1f,
+    fill: 0xffffff,
     align: 'center'
   });
   buttonText.anchor.set(0.5, 0.5);
@@ -225,8 +225,8 @@ const displayResults = () => {
 
   const playAgainButton = new PIXI.Graphics();
 
-  playAgainButton.beginFill(0xffffff);
-  playAgainButton.drawRect(0, 0, 150, 100);
+  playAgainButton.beginFill(0x425cff);
+  playAgainButton.drawRoundedRect(0, 0, 150, 100, 10);
   playAgainButton.endFill();
 
   playAgainButton.buttonMode = true;
