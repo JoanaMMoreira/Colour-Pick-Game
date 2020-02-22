@@ -28,9 +28,10 @@ const renderNewGame = () => {
     0xff7c00
   ];
 
-  let colourIndex:number = 0;
+  let colourIndex: number = 0;
 
   const timeField: PIXI.Text = new PIXI.Text(`Timer ${timeRemaining}`, {
+    // display timer
     fontFamily: 'Arial',
     fontSize: 24,
     fill: 0xffffff,
@@ -43,6 +44,7 @@ const renderNewGame = () => {
   stage.addChild(timeField);
 
   const playerScoreText: PIXI.Text = new PIXI.Text(`Score ${playerScore}`, {
+    // display player score
     fontFamily: 'Arial',
     fontSize: 24,
     fill: 0xffffff,
@@ -54,7 +56,7 @@ const renderNewGame = () => {
 
   stage.addChild(playerScoreText);
 
-  const mainCircle: PIXI.Graphics = new PIXI.Graphics();
+  const mainCircle: PIXI.Graphics = new PIXI.Graphics(); // display main circle
 
   mainCircle.beginFill(availableColours[colourIndex]);
 
@@ -69,6 +71,7 @@ const renderNewGame = () => {
   let circleXPosition: number = 0;
 
   availableColours.map((colour: number, index: number) => {
+    // display all available colours
     const colourCircle: PIXI.Graphics = new PIXI.Graphics();
 
     colourCircle.buttonMode = true;
@@ -169,6 +172,7 @@ const renderNewGame = () => {
 renderNewGame();
 
 const displayResults = () => {
+  // display final results
   const renderer: PIXI.Renderer = PIXI.autoDetectRenderer({
     width: 480,
     height: 600,
