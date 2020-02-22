@@ -143,7 +143,7 @@ const renderNewGame = () => {
 
     const setIntervalID: NodeJS.Timeout = setInterval(rotateColours, 100);
 
-    const randomNumber: number = await getRandomNumber();
+    const randomNumber: number = await getRandomNumber(0, 4);
 
     const stopInterval = () => {
       clearInterval(setIntervalID);
