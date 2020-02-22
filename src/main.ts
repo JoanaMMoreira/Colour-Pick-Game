@@ -4,7 +4,7 @@ let playerScore: number = 0;
 
 let numberOfClicks: number = 0;
 
-const timeRemaining: number = 20;
+let timeRemaining: number = 20;
 
 const renderer: PIXI.Renderer = PIXI.autoDetectRenderer({
   width: 480,
@@ -64,6 +64,7 @@ stage.addChild(mainCircle);
 let circleXPosition = 0;
 
 const getRandomNumber = () => {
+  // fetch random number
   return fetch(
     'https://www.random.org/integers/?num=1&min=0&max=4&col=1&base=10&format=plain&rnd=new'
   )
@@ -119,10 +120,27 @@ const rotateColours = () => {
   renderer.render(stage);
 };
 
+const startTimer = () => {
+  const downloadTimer = setInterval(() => {
+    if (timeRemaining <= 0) {
+      clearInterval(downloadTimer);
+      timeField.text = `Time is up`;
+      // show results screen
+    } else {
+      timeField.text = `Timer ${timeRemaining}`;
+    }
+    timeRemaining -= 1;
+  }, 1000);
+};
+
 const handleClick = async (index: number) => {
   // disable buttons
 
   numberOfClicks += 1;
+
+  if (numberOfClicks === 1) {
+    startTimer(); // start the timer on the first click
+  }
 
   const setIntervalID = setInterval(rotateColours, 100);
 
