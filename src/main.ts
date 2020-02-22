@@ -124,6 +124,7 @@ const startTimer = () => {
 
 const handleClick = async (index: number) => {
   // disable buttons
+  renderer.plugins.interaction.destroy();
 
   numberOfClicks += 1;
 
@@ -150,6 +151,9 @@ const handleClick = async (index: number) => {
     }
 
     // enable buttons
+    renderer.plugins.interaction = new PIXI.interaction.InteractionManager(
+      renderer
+    );
   };
 
   setTimeout(stopInterval, 2000); // stop rotating after 2 seconds
